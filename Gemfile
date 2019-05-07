@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.2'
 
+gem 'bootstrap', '~> 4.3'
 gem 'haml-rails'
 gem 'jbuilder', '~> 2.5'
 gem 'pg'
