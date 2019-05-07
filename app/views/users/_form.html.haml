@@ -1,0 +1,9 @@
+/ Requires the following locals:
+/ user [User]
+/ context [Symbol] :create or :update
+
+= form_for(user, method: (context == :create ? :post : :patch)) do |f|
+  %div.form-group
+    = f.label(:username, 'Username')
+    = f.text_field(:username, class: 'form-control')
+  = f.submit((context == :create ? 'Create' : 'Update'), class: 'btn btn-primary')

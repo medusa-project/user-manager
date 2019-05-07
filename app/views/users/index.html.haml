@@ -1,10 +1,15 @@
+%div.float-right.btn-group{role: 'group'}
+  = link_to(new_user_path, class: 'btn btn-light') do
+    = fa_icon('plus')
+    = ' New User'
+
 %h1 Users
 
-%table
+%table.table.table-striped
   %thead
     %tr
       %th NetID
   %tbody
     - @users.each do |user|
       %tr
-        %td= user.username
+        %td= link_to(user.username, user)
