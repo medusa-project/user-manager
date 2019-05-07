@@ -1,0 +1,10 @@
+%h1 Users
+
+%table
+  %thead
+    %tr
+      %th NetID
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.username
