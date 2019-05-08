@@ -1,3 +1,7 @@
+= breadcrumb({ label: 'Users', url: users_path },
+             { label: @user, url: user_path(@user) },
+             { label: 'Edit' })
+
 %h1 Edit User
 
 = render partial: 'form', locals: { user: @user, context: :update }

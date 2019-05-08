@@ -16,6 +16,29 @@ module ApplicationHelper
   end
 
   ##
+  # @param items [Enumerable<Hash>] Enumerable of hashes with :label and
+  #                                 :url keys.
+  # @return [String] Bootstrap breadcrumb component.
+  #
+  def breadcrumb(*items)
+    html = StringIO.new
+    html << '<nav aria-label="breadcrumb">'
+    html <<   '<ol class="breadcrumb">'
+    items.each_with_index do |item, index|
+      if index < items.length - 1
+        html << sprintf('<li class="breadcrumb-item"><a href="%s">%s</a></li>',
+                        item[:url], item[:label])
+      else
+        html << sprintf('<li class="breadcrumb-item active" aria-current="page">%s</li>',
+                        item[:label])
+      end
+    end
+    html <<   '</ol>'
+    html << '</nav>'
+    raw(html.string)
+  end
+
+  ##
   # @return [String] Bootstrap alerts for each flash message.
   #
   def flashes

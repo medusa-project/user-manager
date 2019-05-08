@@ -1,3 +1,6 @@
+= breadcrumb({ label: 'Users', url: users_path },
+             { label: @user, url: user_path(@user) })
+
 %div.float-right.btn-group{role: 'group'}
   = link_to(edit_user_path(@user),
             class: 'btn btn-light') do
