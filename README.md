@@ -1,24 +1,53 @@
-# README
+The User Manager is a Rails application that manages user authorization for
+the Medusa ecosystem.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Requirements
 
-Things you may want to cover:
+* PostgreSQL 9.x
 
-* Ruby version
+# Development
 
-* System dependencies
+## Prepare a development environment
 
-* Configuration
+```
+# Install RVM
+$ \curl -sSL https://get.rvm.io | bash -s stable
+$ source ~/.bash_profile
 
-* Database creation
+# Clone the repository
+$ git clone https://github.com/medusa-project/user-manager.git
+$ cd user-manager
 
-* Database initialization
+# Install Ruby into RVM
+$ rvm install "$(< .ruby-version)" --autolibs=0
 
-* How to run the test suite
+# Install Bundler
+$ gem install bundler
 
-* Services (job queues, cache servers, search engines, etc.)
+# Install the gems needed by the application
+$ bundle install
 
-* Deployment instructions
+# Configure the application
+# After acquiring config/master.key from someone on the project team:
+$ bin/rails credentials:edit
 
-* ...
+# Create and seed the database
+$ bin/rails db:setup
+
+# Add a user
+$ bin/rails users:create <username>
+
+# Start the server
+$ bin/rails server
+```
+
+## Sign in
+
+Navigate to `/signin` and log in as the user you created, using any email
+address as a password.
+
+# Production
+
+The following environment variables must be passed into the container:
+
+* `SHIBBOLETH_HOST`
