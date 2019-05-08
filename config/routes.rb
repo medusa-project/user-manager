@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   match '/auth/:provider/callback', to: 'sessions#create', via: [:get, :post],
         as: 'auth' # used by omniauth
 
+  match '/signin', to: 'sessions#new', via: :get
+  match '/signout', to: 'sessions#destroy', via: :delete
+
   resources :users, param: :username
 
   match '/', to: 'users#index', via: :all, as: 'root'

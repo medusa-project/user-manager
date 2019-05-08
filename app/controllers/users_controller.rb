@@ -2,6 +2,8 @@ class UsersController < ApplicationController
 
   PERMITTED_PARAMS = %w(username)
 
+  before_action :require_admin
+
   ##
   # Responds to POST /users
   #
