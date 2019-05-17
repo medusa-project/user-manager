@@ -6,7 +6,11 @@ module SessionsHelper
 
   def current_user
     unless session[:user].nil?
-      @current_user = User.find(session[:user])
+      begin
+        @current_user = User.find(session[:user])
+      rescue ActiveRecord::RecordNotFound
+        sign_out
+      end
     end
   end
 
