@@ -1,5 +1,7 @@
 class Role < ApplicationRecord
 
+  ADMIN_KEY = 'admin'
+
   has_and_belongs_to_many :users
 
   validates_length_of :key, minimum: 2, maximum: 255, allow_blank: false

@@ -1,0 +1,6 @@
+= breadcrumb({ label: 'Roles', url: users_path },
+             { label: 'New Role' })
+
+%h1 New Role
+
+= render partial: 'form', locals: { role: @role, context: :create }

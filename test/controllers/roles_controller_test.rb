@@ -1,52 +1,53 @@
 require 'test_helper'
 
-class UsersControllerTest < ActionDispatch::IntegrationTest
+class RolesControllerTest < ActionDispatch::IntegrationTest
 
-  # create()
+ # create()
 
   test 'create is inaccessible to non-admin users' do
     sign_in_as(users(:user))
-    post '/users', {}
+    post '/roles', {}
     assert_redirected_to root_path
   end
 
-  test 'create creates a user' do
+  test 'create creates a role' do
     sign_in_as(users(:admin))
-    post '/users', {
+    post '/roles', {
         params: {
-            user: {
-                username: 'newuser'
+            role: {
+                key: 'newrole',
+                name: 'New Role'
             }
         }
     }
-    assert_not_nil User.find_by_username('newuser')
+    assert_not_nil Role.find_by_key('newrole')
   end
 
   # destroy()
 
   test 'destroy is inaccessible to non-admin users' do
     sign_in_as(users(:user))
-    delete '/users/user', {}
+    delete '/roles/admin', {}
     assert_redirected_to root_path
   end
 
-  test 'destroy destroys a user' do
+  test 'destroy destroys a role' do
     sign_in_as(users(:admin))
-    delete '/users/user'
-    assert_nil User.find_by_username('user')
+    delete '/roles/admin'
+    assert_nil Role.find_by_key('admin')
   end
 
   # edit()
 
   test 'edit is accessible to admin users' do
     sign_in_as(users(:admin))
-    get '/users/admin/edit'
+    get '/roles/admin/edit'
     assert_response :ok
   end
 
   test 'edit is inaccessible to non-admin users' do
     sign_in_as(users(:user))
-    get '/users/admin/edit'
+    get '/roles/admin/edit'
     assert_redirected_to root_path
   end
 
@@ -54,13 +55,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test 'index is accessible to admin users' do
     sign_in_as(users(:admin))
-    get '/users'
+    get '/roles'
     assert_response :ok
   end
 
   test 'index is inaccessible to non-admin users' do
     sign_in_as(users(:user))
-    get '/users'
+    get '/roles'
     assert_redirected_to root_path
   end
 
@@ -68,13 +69,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test 'new is accessible to admin users' do
     sign_in_as(users(:admin))
-    get '/users/new'
+    get '/roles/new'
     assert_response :ok
   end
 
   test 'new is inaccessible to non-admin users' do
     sign_in_as(users(:user))
-    get '/users/new'
+    get '/roles/new'
     assert_redirected_to root_path
   end
 
@@ -82,13 +83,13 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test 'show is accessible to admin users' do
     sign_in_as(users(:admin))
-    get '/users/admin'
+    get '/roles/admin'
     assert_response :ok
   end
 
   test 'show is inaccessible to non-admin users' do
     sign_in_as(users(:user))
-    get '/users/admin'
+    get '/roles/admin'
     assert_redirected_to root_path
   end
 
@@ -96,24 +97,24 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test 'update is inaccessible to non-admin users' do
     sign_in_as(users(:user))
-    patch '/users/user', {}
+    patch '/roles/admin', {}
     assert_redirected_to root_path
   end
 
-  test 'update updates a user' do
+  test 'update updates a role' do
     sign_in_as(users(:admin))
-    user = users(:user)
+    role = roles(:user)
 
-    patch "/users/#{user.username}", {
+    patch "/roles/#{role.key}", {
         params: {
-            user: {
-                username: 'newusername'
+            role: {
+                key: 'newkey',
+                name: 'New Name'
             }
         }
     }
-
-    user.reload
-    assert_equal 'newusername', user.username
+    role.reload
+    assert_equal 'newkey', role.key
   end
 
 end

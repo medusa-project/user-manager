@@ -1,0 +1,22 @@
+= breadcrumb({ label: 'Roles', url: roles_path },
+             { label: @role, url: role_path(@role) })
+
+%div.float-right.btn-group{role: 'group'}
+  = link_to(edit_role_path(@role),
+            class: 'btn btn-light') do
+    = fa_icon('pencil')
+    = ' Edit'
+  = link_to(role_path(@role),
+            class: 'btn btn-danger',
+            method: :delete,
+            data: { confirm: 'Are you sure you want to delete this role? This cannot be undone.' }) do
+    = fa_icon('trash')
+    = ' Delete'
+
+%h1= @role
+
+%h2 Users
+
+%ul
+  - @users.each do |user|
+    %li= link_to(user.username, user)

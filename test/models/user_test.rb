@@ -2,8 +2,16 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
 
+  test 'admin? returns true for administrators' do
+    assert users(:admin).admin?
+  end
+
+  test 'admin? returns false for non-administrators' do
+    assert !users(:user).admin?
+  end
+
   test 'to_s returns the username' do
-    assert_equal 'bert', users(:bert).to_s
+    assert_equal 'admin', users(:admin).to_s
   end
 
   test 'username cannot be nil' do

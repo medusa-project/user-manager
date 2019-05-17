@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
 
-  PERMITTED_PARAMS = %w(username)
+  PERMITTED_PARAMS = [:username, role_ids: []]
 
+  before_action :require_authenticated
   before_action :require_admin
 
   ##
@@ -60,6 +61,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by_username(params[:username])
     raise ActiveRecord::RecordNotFound unless @user
+    @roles = @user.roles.order(:name)
   end
 
   ##

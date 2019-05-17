@@ -6,4 +6,14 @@
   %div.form-group
     = f.label(:username, 'Username')
     = f.text_field(:username, class: 'form-control')
+
+  %div.form-group
+    %label Roles
+    = hidden_field_tag('user[role_ids][]', nil)
+    - Role.all.order(:name).each do |role|
+      %div.checkbox
+        = label_tag do
+          = check_box_tag(:role_ids, role.id, @user.roles.include?(role), name: 'user[role_ids][]')
+          = role.name
+
   = f.submit((context == :create ? 'Create' : 'Update'), class: 'btn btn-primary')

@@ -16,3 +16,9 @@
     = ' Delete'
 
 %h1= @user
+
+%h2 Roles
+
+%ul
+  - @roles.each do |role|
+    %li= link_to(role.name, role)

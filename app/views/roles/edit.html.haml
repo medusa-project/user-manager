@@ -1,0 +1,7 @@
+= breadcrumb({ label: 'Roles', url: roles_path },
+             { label: @role, url: role_path(@role) },
+             { label: 'Edit' })
+
+%h1 Edit Role
+
+= render partial: 'form', locals: { role: @role, context: :update }
