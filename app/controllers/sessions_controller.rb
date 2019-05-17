@@ -45,7 +45,7 @@ class SessionsController < ApplicationController
   protected
 
   def clear_and_return_return_path
-    return_url = session[:return_to] || session[:referer] || books_path
+    return_url = session[:return_to] || session[:referer] || root_path
     session[:return_to] = session[:referer] = nil
     reset_session
     return_url
