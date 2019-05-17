@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-bert:
-  username: bert
-  roles: admin
+admin:
+  key: admin
+  name: Administrators
 
-ernie:
-  username: ernie
-  roles: user
+user:
+  key: users
+  name: Users
